@@ -7,43 +7,92 @@
 <meta name="description" content="Tiga paket jasa pembuatan website kampus — dari profil dasar sampai sistem PMB online lengkap, termasuk domain, hosting, dan pendampingan.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --ink: #16213E;
-  --ink-soft: #364569;
-  --gold: #9C6F27;
-  --gold-soft: #C99A3F;
-  --forest: #2F6F62;
-  --parchment: #FBF9F4;
-  --parchment-alt: #F1EBDC;
+  --ink: #0F172A;
+  --ink-soft: #334155;
+  --primary: #1E40AF;
+  --primary-light: #3B82F6;
+  --primary-dark: #1E3A8A;
+  --accent: #F59E0B;
+  --accent-light: #FCD34D;
+  --forest: #059669;
+  --forest-light: #10B981;
+  --bg: #F8FAFC;
+  --bg-alt: #F1F5F9;
   --card: #FFFFFF;
-  --line: #E4DECE;
-  --muted: #6B7280;
+  --border: #E2E8F0;
+  --muted: #64748B;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+  --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+  --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+  --shadow-xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+  --radius: 16px;
+  --radius-sm: 10px;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background: var(--parchment);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
   color: var(--ink);
-  line-height: 1.6;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   font-size: 16px;
+  overflow-x: hidden;
 }
-img, svg { display: block; max-width: 100%; }
-h1, h2, h3, .price-amount, .pkg-tier { font-family: 'Source Serif 4', Georgia, serif; }
+h1, h2, h3, .price-amount, .pkg-tier { font-family: 'Playfair Display', Georgia, serif; }
 a { color: inherit; }
-.wrap { max-width: 1080px; margin: 0 auto; padding-inline: clamp(20px, 5vw, 40px); }
-section[id] { scroll-margin-top: 76px; }
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: clamp(20px, 5vw, 48px); }
+section[id] { scroll-margin-top: 80px; }
 
 button:focus-visible, a:focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 3px solid var(--primary-light);
   outline-offset: 3px;
 }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { transition: none !important; animation: none !important; }
+}
+
+/* ---------- Animations ---------- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ---------- Buttons ---------- */
@@ -51,100 +100,208 @@ button:focus-visible, a:focus-visible {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 13px 26px;
-  border-radius: 8px;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 12px;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.95rem;
   border: none;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-  font-family: 'Inter', sans-serif;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  position: relative;
+  overflow: hidden;
 }
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+.btn:hover::before { left: 100%; }
 .btn-primary {
-  background: var(--ink);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
   color: white;
+  box-shadow: 0 4px 15px rgba(30, 64, 175, 0.4);
 }
-.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(22,33,62,0.25); }
-.btn-gold {
-  background: var(--gold);
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(30, 64, 175, 0.5);
+}
+.btn-accent {
+  background: linear-gradient(135deg, var(--accent) 0%, #D97706 100%);
   color: white;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
 }
-.btn-gold:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(156,111,39,0.3); }
+.btn-accent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.5);
+}
 .btn-ghost {
-  background: transparent;
-  color: var(--ink);
-  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.1);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+  backdrop-filter: blur(10px);
 }
-.btn-ghost:hover { border-color: var(--ink); }
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.5);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+.btn-outline:hover {
+  background: var(--primary);
+  color: white;
+}
 
 /* ---------- Hero ---------- */
 .hero {
-  background: var(--ink);
-  background-image:
-    linear-gradient(160deg, var(--ink) 0%, #223159 100%),
-    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-  background-size: auto, 34px 34px, 34px 34px;
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
   color: white;
-  padding: clamp(48px, 8vw, 84px) 0 clamp(36px, 6vw, 56px);
+  padding: clamp(80px, 12vw, 140px) 0 clamp(60px, 8vw, 100px);
+  position: relative;
+  overflow: hidden;
 }
-.hero-eyebrow {
-  font-size: 0.92rem;
-  color: #D9C48E;
-  margin-bottom: 14px;
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite reverse;
+}
+.hero .wrap {
+  position: relative;
+  z-index: 2;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.6s ease;
+}
+.hero-badge-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--forest-light);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
 }
 .hero h1 {
-  font-size: clamp(1.85rem, 1.35rem + 2.2vw, 2.9rem);
-  font-weight: 600;
-  line-height: 1.25;
+  font-size: clamp(2.2rem, 1.5rem + 3vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.15;
   max-width: 16ch;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.6s ease 0.1s both;
+}
+.hero h1 span {
+  background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 .hero p {
-  margin-top: 18px;
-  max-width: 56ch;
-  color: #C7D0E0;
-  font-size: clamp(1rem, 0.94rem + 0.3vw, 1.1rem);
+  max-width: 60ch;
+  color: #94A3B8;
+  font-size: clamp(1.05rem, 0.98rem + 0.3vw, 1.2rem);
+  line-height: 1.8;
+  animation: fadeInUp 0.6s ease 0.2s both;
 }
-/* Stat strip */
-.stats {
-  background: var(--card);
-  border-bottom: 1px solid var(--line);
-}
-.stats-row {
+.hero-actions {
   display: flex;
   flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 36px;
+  animation: fadeInUp 0.6s ease 0.3s both;
+}
+
+/* ---------- Stats ---------- */
+.stats {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 40px 0;
+  position: relative;
+  z-index: 3;
+}
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 32px;
+  text-align: center;
 }
 .stat {
-  padding: 18px 24px 18px 0;
-  margin-right: 24px;
-  border-right: 1px solid var(--line);
+  padding: 24px;
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
 }
-.stat:last-child { border-right: none; margin-right: 0; }
+.stat:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-light);
+}
 .stat-num {
   display: block;
-  font-family: 'Source Serif 4', serif;
-  font-weight: 700;
-  font-size: 1.45rem;
-  color: var(--ink);
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+  font-size: 1.8rem;
+  color: var(--primary);
   font-variant-numeric: tabular-nums;
+  margin-bottom: 4px;
 }
-.stat-label { display: block; font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+.stat-label {
+  display: block;
+  font-size: 0.88rem;
+  color: var(--muted);
+  font-weight: 500;
+}
 
 /* ---------- Quick nav ---------- */
 .quicknav {
-  background: rgba(251,249,244,0.92);
-  backdrop-filter: blur(6px);
-  border-bottom: 1px solid var(--line);
+  background: rgba(248, 250, 252, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 50;
 }
 .quicknav-row {
   display: flex;
-  gap: clamp(18px, 4vw, 30px);
+  gap: clamp(20px, 4vw, 36px);
   overflow-x: auto;
-  padding: 14px 0;
+  padding: 16px 0;
 }
 .quicknav a {
   white-space: nowrap;
@@ -152,77 +309,153 @@ button:focus-visible, a:focus-visible {
   font-size: 0.92rem;
   font-weight: 600;
   color: var(--ink-soft);
+  padding: 8px 0;
+  position: relative;
+  transition: color 0.3s ease;
 }
-.quicknav a:hover { color: var(--gold); }
+.quicknav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+.quicknav a:hover {
+  color: var(--primary);
+}
+.quicknav a:hover::after {
+  width: 100%;
+}
 
 /* ---------- Section shell ---------- */
-.section { padding: clamp(44px, 7vw, 76px) 0; }
-.section-head { max-width: 60ch; margin-bottom: clamp(28px, 5vw, 44px); }
+.section { padding: clamp(60px, 10vw, 100px) 0; }
+.section-head {
+  max-width: 65ch;
+  margin-bottom: clamp(40px, 6vw, 60px);
+  text-align: center;
+  margin-inline: auto;
+}
 .section-head h2 {
-  font-size: clamp(1.5rem, 1.28rem + 1vw, 2rem);
-  font-weight: 600;
+  font-size: clamp(1.8rem, 1.5rem + 1.2vw, 2.5rem);
+  font-weight: 700;
   color: var(--ink);
+  margin-bottom: 16px;
 }
 .section-head p {
-  margin-top: 10px;
   color: var(--muted);
-  font-size: 1.02rem;
+  font-size: 1.1rem;
+  line-height: 1.7;
 }
-#perbandingan { background: var(--parchment-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+#perbandingan {
+  background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
 
-/* ---------- Package blocks ---------- */
-.pkg {
-  border-top: 1px solid var(--line);
-  padding-block: clamp(32px, 5vw, 44px);
+/* ---------- Package Cards ---------- */
+.pkg-grid {
+  display: grid;
+  gap: 32px;
 }
-.pkg:first-of-type { border-top: none; padding-top: 4px; }
+.pkg {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: clamp(32px, 5vw, 48px);
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+.pkg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-light), var(--primary));
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+.pkg:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary-light);
+}
+.pkg:hover::before {
+  transform: scaleX(1);
+}
 .pkg.featured {
-  border-left: 3px solid var(--gold);
-  padding-left: clamp(16px, 3vw, 26px);
-  background: linear-gradient(180deg, rgba(201,154,63,0.06), transparent 60%);
+  border: 2px solid var(--accent);
+  background: linear-gradient(135deg, #FFFBEB 0%, #FFFFFF 50%, #FFFBEB 100%);
+  box-shadow: 0 10px 40px rgba(245, 158, 11, 0.15);
+}
+.pkg.featured::before {
+  background: linear-gradient(90deg, var(--accent), #D97706);
+}
+.pkg.featured:hover {
+  box-shadow: 0 20px 60px rgba(245, 158, 11, 0.25);
+  border-color: var(--accent);
 }
 
 .pkg-head {
   display: flex;
   flex-wrap: wrap;
-  gap: 18px 28px;
-  align-items: baseline;
+  gap: 20px 32px;
+  align-items: flex-start;
   justify-content: space-between;
+  margin-bottom: 32px;
 }
 .pkg-heading {
   display: flex;
-  gap: 16px;
-  align-items: baseline;
+  gap: 18px;
+  align-items: flex-start;
   flex: 1 1 320px;
 }
 .pkg-tier {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--gold-soft);
+  font-size: 2.8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
   flex-shrink: 0;
 }
+.pkg.featured .pkg-tier {
+  background: linear-gradient(135deg, var(--accent) 0%, #D97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 .pkg-titles h3 {
-  font-size: clamp(1.2rem, 1.08rem + 0.5vw, 1.45rem);
-  font-weight: 600;
+  font-size: clamp(1.3rem, 1.15rem + 0.6vw, 1.6rem);
+  font-weight: 700;
   color: var(--ink);
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   flex-wrap: wrap;
+  margin-bottom: 8px;
 }
 .pkg-pill {
   font-size: 0.72rem;
   font-weight: 700;
   color: white;
-  background: var(--gold);
-  padding: 3px 10px;
+  background: linear-gradient(135deg, var(--accent) 0%, #D97706 100%);
+  padding: 5px 12px;
   border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 .pkg-titles p {
-  margin-top: 5px;
   color: var(--muted);
-  font-size: 0.95rem;
-  max-width: 48ch;
+  font-size: 1rem;
+  max-width: 50ch;
+  line-height: 1.6;
 }
 .pkg-price {
   text-align: right;
@@ -230,79 +463,125 @@ button:focus-visible, a:focus-visible {
 }
 .price-amount {
   display: block;
-  font-size: clamp(1.35rem, 1.2rem + 0.7vw, 1.7rem);
-  font-weight: 700;
+  font-size: clamp(1.6rem, 1.4rem + 0.8vw, 2rem);
+  font-weight: 800;
   color: var(--ink);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
-.price-note { font-size: 0.82rem; color: var(--muted); }
+.price-note {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 500;
+}
 
 .pkg-body {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 28px;
-  margin-top: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 32px;
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
 }
 .pkg-col h4 {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--ink);
-  text-transform: none;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--line);
-  margin-bottom: 4px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--primary);
+  margin-bottom: 16px;
+  display: inline-block;
+}
+.pkg.featured .pkg-col h4 {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
 }
 .check-list { list-style: none; }
 .check-list li {
   display: flex;
   align-items: flex-start;
-  gap: 9px;
-  padding: 7px 0;
-  font-size: 0.92rem;
-  border-bottom: 1px solid var(--line);
+  gap: 10px;
+  padding: 10px 0;
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--border);
+  transition: all 0.2s ease;
 }
 .check-list li:last-child { border-bottom: none; }
+.check-list li:hover {
+  padding-left: 8px;
+  color: var(--primary);
+}
+.check-list li.no:hover {
+  color: var(--muted);
+}
 .tick {
   flex-shrink: 0;
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 1.6;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.75rem;
 }
-.tick.yes { color: var(--forest); }
-.tick.no { color: var(--muted); }
+.tick.yes {
+  color: white;
+  background: var(--forest);
+}
+.tick.no {
+  color: var(--muted);
+  background: var(--bg-alt);
+}
 .check-list li.no { color: var(--muted); }
 
 .pkg-foot {
-  margin-top: 26px;
+  margin-top: 32px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
 }
-.pkg-duration { font-size: 0.9rem; color: var(--muted); }
+.pkg-duration {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+.pkg-duration::before {
+  content: '⏱';
+  font-size: 1rem;
+}
 
 /* ---------- Comparison table ---------- */
 .table-wrap {
   overflow-x: auto;
-  border: 1px solid var(--line);
-  border-radius: 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   background: var(--card);
+  box-shadow: var(--shadow);
 }
 table.compare {
   border-collapse: collapse;
   width: 100%;
-  min-width: 620px;
+  min-width: 680px;
 }
 table.compare th, table.compare td {
-  padding: 12px 16px;
+  padding: 16px 20px;
   text-align: center;
-  font-size: 0.9rem;
-  border-bottom: 1px solid var(--line);
-  white-space: nowrap;
+  font-size: 0.92rem;
+  border-bottom: 1px solid var(--border);
 }
 table.compare th {
-  background: var(--ink);
+  background: linear-gradient(135deg, var(--ink) 0%, #1E293B 100%);
   color: white;
   font-weight: 600;
   position: sticky;
@@ -314,65 +593,207 @@ table.compare th:first-child, table.compare td:first-child {
   position: sticky;
   left: 0;
   background: var(--card);
-  box-shadow: 1px 0 0 var(--line);
+  box-shadow: 2px 0 0 var(--border);
+  font-weight: 600;
 }
 table.compare th:first-child { background: var(--ink); z-index: 3; }
-table.compare td:first-child { font-weight: 500; z-index: 1; }
-table.compare tr:nth-child(even) td { background: var(--parchment-alt); }
-table.compare tr:nth-child(even) td:first-child { background: #EDE6D4; }
+table.compare tr:nth-child(even) td { background: var(--bg); }
+table.compare tr:nth-child(even) td:first-child { background: var(--bg-alt); }
 table.compare tr.cat td {
-  background: var(--ink) !important;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%) !important;
   color: white;
-  font-weight: 600;
+  font-weight: 700;
   text-align: left;
   position: static;
   box-shadow: none;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
-table.compare .yes { color: var(--forest); font-weight: 700; }
+table.compare .yes {
+  color: var(--forest);
+  font-weight: 700;
+}
+table.compare .yes::after {
+  content: ' ✓';
+}
 table.compare .no { color: var(--muted); }
-.compare-note { margin-top: 14px; font-size: 0.88rem; color: var(--muted); }
+.compare-note {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  text-align: center;
+  font-style: italic;
+}
 
-/* ---------- CTA ---------- */
+/* ---------- CTA Section ---------- */
+.cta-section {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.cta-section::after {
+  content: '';
+  position: absolute;
+  bottom: -40%;
+  left: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.cta-section .wrap {
+  position: relative;
+  z-index: 2;
+}
+.cta-section h2 {
+  font-size: clamp(1.8rem, 1.5rem + 1.2vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.cta-section p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  max-width: 50ch;
+  margin: 0 auto 32px;
+  line-height: 1.7;
+}
+.cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
 /* ---------- Footer ---------- */
 footer {
   background: var(--ink);
-  color: #C7D0E0;
-  padding: 34px 0;
+  color: #94A3B8;
+  padding: 48px 0;
   text-align: center;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
 }
-footer p + p { margin-top: 8px; opacity: 0.75; }
+footer .footer-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 16px;
+}
+footer p + p { margin-top: 12px; opacity: 0.7; }
+footer .footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+footer .footer-links a {
+  color: #94A3B8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+footer .footer-links a:hover { color: var(--accent); }
 
-/* ---------- Responsive tweaks ---------- */
-@media (max-width: 560px) {
-  .pkg-price { text-align: left; }
+/* ---------- WhatsApp Float ---------- */
+.whatsapp-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 60px;
+  height: 60px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+  z-index: 100;
+  transition: all 0.3s ease;
+  animation: pulse 2s ease-in-out infinite;
+  text-decoration: none;
+  font-size: 1.8rem;
+}
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
   .pkg-head { flex-direction: column; }
-  table.compare th, table.compare td { padding: 10px 12px; }
+  .pkg-price { text-align: left; }
+  .hero-actions { flex-direction: column; }
+  .hero-actions .btn { width: 100%; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .stats-row { grid-template-columns: 1fr; }
+  .pkg-tier { font-size: 2.2rem; }
+  table.compare th, table.compare td { padding: 12px 14px; }
 }
 </style>
 </head>
 <body>
 
+<!-- WhatsApp Float -->
+<a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20tertarik%20dengan%20jasa%20pembuatan%20website%20kampus" class="whatsapp-float" target="_blank" aria-label="Chat WhatsApp">
+  💬
+</a>
+
 <header class="hero">
   <div class="wrap">
-    <p class="hero-eyebrow">Jasa Pembuatan Website Kampus</p>
-    <h1>Website kampus yang lengkap, cepat tayang, dan mudah dikelola</h1>
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Layanan Profesional 2026
+    </div>
+    <h1>Website kampus <span>modern & profesional</span> untuk institusi Anda</h1>
+    <p>Solusi digital lengkap dari profil kampus dasar sampai sistem PMB online dengan halaman multi-fakultas. Semua paket sudah termasuk domain, hosting, dan pendampingan admin.</p>
+    <div class="hero-actions">
+      <a href="#paket" class="btn btn-accent">Lihat Paket & Harga →</a>
+      <a href="#perbandingan" class="btn btn-ghost">Bandingkan Fitur</a>
+    </div>
   </div>
 </header>
 
 <div class="stats">
   <div class="wrap stats-row">
-    <div class="stat"><span class="stat-num">3</span><span class="stat-label">Paket Pilihan</span></div>
-    <div class="stat"><span class="stat-num">Rp 6,9jt</span><span class="stat-label">Harga Mulai Dari</span></div>
-    <div class="stat"><span class="stat-num">2–12</span><span class="stat-label">Minggu Pengerjaan</span></div>
-    <div class="stat"><span class="stat-num">1 Thn</span><span class="stat-label">Domain & Hosting Termasuk</span></div>
+    <div class="stat animate-on-scroll">
+      <span class="stat-num">3</span>
+      <span class="stat-label">Paket Pilihan</span>
+    </div>
+    <div class="stat animate-on-scroll">
+      <span class="stat-num">Rp 6,9jt</span>
+      <span class="stat-label">Harga Mulai Dari</span>
+    </div>
+    <div class="stat animate-on-scroll">
+      <span class="stat-num">2–12</span>
+      <span class="stat-label">Minggu Pengerjaan</span>
+    </div>
+    <div class="stat animate-on-scroll">
+      <span class="stat-num">1 Thn</span>
+      <span class="stat-label">Domain & Hosting</span>
+    </div>
   </div>
 </div>
 
 <nav class="quicknav">
   <div class="wrap quicknav-row">
-    <a href="#paket">Paket & Harga</a>
-    <a href="#perbandingan">Perbandingan Fitur</a>
+    <a href="#paket">📦 Paket & Harga</a>
+    <a href="#perbandingan">📊 Perbandingan Fitur</a>
+    <a href="#cta">💬 Hubungi Kami</a>
   </div>
 </nav>
 
@@ -381,13 +802,15 @@ footer p + p { margin-top: 8px; opacity: 0.75; }
 <!-- PAKET -->
 <section id="paket" class="section">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head animate-on-scroll">
       <h2>Pilih paket yang sesuai kebutuhan</h2>
       <p>Berikut cakupan halaman, fitur, dan kelengkapan dari masing-masing paket. Semua harga sudah termasuk domain, hosting, dan maintenance di periode awal.</p>
     </div>
 
+    <div class="pkg-grid">
+
     <!-- STARTER -->
-    <article class="pkg" id="starter">
+    <article class="pkg animate-on-scroll" id="starter">
       <div class="pkg-head">
         <div class="pkg-heading">
           <span class="pkg-tier">01</span>
@@ -445,16 +868,17 @@ footer p + p { margin-top: 8px; opacity: 0.75; }
 
       <div class="pkg-foot">
         <span class="pkg-duration">Estimasi pengerjaan: 2–3 minggu</span>
+        <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20tertarik%20dengan%20Paket%20Starter" class="btn btn-outline" target="_blank">Pilih Paket Ini</a>
       </div>
     </article>
 
     <!-- PROFESSIONAL -->
-    <article class="pkg featured" id="professional">
+    <article class="pkg featured animate-on-scroll" id="professional">
       <div class="pkg-head">
         <div class="pkg-heading">
           <span class="pkg-tier">02</span>
           <div class="pkg-titles">
-            <h3>Paket Professional <span class="pkg-pill">Paling diminati</span></h3>
+            <h3>Paket Professional <span class="pkg-pill">Paling Diminati</span></h3>
             <p>Website kampus lengkap dengan halaman per fakultas dan program studi.</p>
           </div>
         </div>
@@ -514,11 +938,12 @@ footer p + p { margin-top: 8px; opacity: 0.75; }
 
       <div class="pkg-foot">
         <span class="pkg-duration">Estimasi pengerjaan: 4–6 minggu</span>
+        <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20tertarik%20dengan%20Paket%20Professional" class="btn btn-accent" target="_blank">Pilih Paket Ini</a>
       </div>
     </article>
 
     <!-- ENTERPRISE -->
-    <article class="pkg" id="enterprise">
+    <article class="pkg animate-on-scroll" id="enterprise">
       <div class="pkg-head">
         <div class="pkg-heading">
           <span class="pkg-tier">03</span>
@@ -580,41 +1005,43 @@ footer p + p { margin-top: 8px; opacity: 0.75; }
 
       <div class="pkg-foot">
         <span class="pkg-duration">Estimasi pengerjaan: 8–12 minggu</span>
+        <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20tertarik%20dengan%20Paket%20Enterprise" class="btn btn-outline" target="_blank">Pilih Paket Ini</a>
       </div>
     </article>
 
+    </div>
   </div>
 </section>
 
 <!-- PERBANDINGAN -->
 <section id="perbandingan" class="section">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head animate-on-scroll">
       <h2>Bandingkan paket secara sekilas</h2>
       <p>Ringkasan fitur utama ketiga paket dalam satu tabel. Geser ke samping untuk melihat semua kolom di layar kecil.</p>
     </div>
 
-    <div class="table-wrap">
+    <div class="table-wrap animate-on-scroll">
       <table class="compare">
         <thead>
           <tr>
             <th>Fitur</th>
-            <th>Starter<br>Rp 6,9jt</th>
-            <th>Professional<br>Rp 15,5jt</th>
-            <th>Enterprise<br>Rp 29,5jt</th>
+            <th>Starter<br><span style="font-weight:400;font-size:0.8rem;">Rp 6,9jt</span></th>
+            <th>Professional<br><span style="font-weight:400;font-size:0.8rem;">Rp 15,5jt</span></th>
+            <th>Enterprise<br><span style="font-weight:400;font-size:0.8rem;">Rp 29,5jt</span></th>
           </tr>
         </thead>
         <tbody>
-          <tr class="cat"><td colspan="4">Halaman</td></tr>
+          <tr class="cat"><td colspan="4">📄 Halaman</td></tr>
           <tr><td>Jumlah halaman</td><td>5–8</td><td>15–25</td><td>30+</td></tr>
-          <tr><td>Halaman per fakultas</td><td class="no">–</td><td class="yes">✓ 6 fakultas</td><td class="yes">✓ 6+ fakultas</td></tr>
-          <tr><td>Halaman per prodi</td><td class="no">–</td><td class="yes">✓ 15 prodi</td><td class="yes">✓ 15+ prodi</td></tr>
+          <tr><td>Halaman per fakultas</td><td class="no">–</td><td class="yes">6 fakultas</td><td class="yes">6+ fakultas</td></tr>
+          <tr><td>Halaman per prodi</td><td class="no">–</td><td class="yes">15 prodi</td><td class="yes">15+ prodi</td></tr>
           <tr><td>Profil pimpinan</td><td class="no">–</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-          <tr><td>Halaman PMB</td><td class="no">–</td><td class="yes">✓ Info</td><td class="yes">✓ Lengkap</td></tr>
+          <tr><td>Halaman PMB</td><td class="no">–</td><td class="yes">Info</td><td class="yes">Lengkap</td></tr>
 
-          <tr class="cat"><td colspan="4">Fitur Utama</td></tr>
+          <tr class="cat"><td colspan="4">⚡ Fitur Utama</td></tr>
           <tr><td>Responsive design</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-          <tr><td>Blog / berita</td><td class="yes">✓ Basic</td><td class="yes">✓ Lanjutan</td><td class="yes">✓ Penuh</td></tr>
+          <tr><td>Blog / berita</td><td class="yes">Basic</td><td class="yes">Lanjutan</td><td class="yes">Penuh</td></tr>
           <tr><td>Filter kategori AJAX</td><td class="no">–</td><td class="yes">✓</td><td class="yes">✓</td></tr>
           <tr><td>Event / agenda</td><td class="no">–</td><td class="yes">✓</td><td class="yes">✓</td></tr>
           <tr><td>Counter statistik animasi</td><td class="no">–</td><td class="yes">✓</td><td class="yes">✓</td></tr>
@@ -628,7 +1055,7 @@ footer p + p { margin-top: 8px; opacity: 0.75; }
           <tr><td>Subdomain fakultas</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td></tr>
           <tr><td>Tracer study</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td></tr>
 
-          <tr class="cat"><td colspan="4">SEO & Marketing</td></tr>
+          <tr class="cat"><td colspan="4">🔍 SEO & Marketing</td></tr>
           <tr><td>SEO basic</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
           <tr><td>Google Analytics</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
           <tr><td>Google Search Console</td><td class="no">–</td><td class="yes">✓</td><td class="yes">✓</td></tr>
@@ -636,15 +1063,15 @@ footer p + p { margin-top: 8px; opacity: 0.75; }
           <tr><td>Open Graph + Twitter Card</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td></tr>
           <tr><td>Google Ads</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td></tr>
 
-          <tr class="cat"><td colspan="4">Termasuk</td></tr>
-          <tr><td>Domain .ac.id</td><td class="yes">✓ 1 th</td><td class="yes">✓ 1 th</td><td class="yes">✓ 1 th</td></tr>
-          <tr><td>Hosting SSD</td><td class="yes">✓ 2GB</td><td class="yes">✓ 5GB</td><td class="yes">✓ 10GB</td></tr>
-          <tr><td>Training admin</td><td class="yes">✓ 2 jam</td><td class="yes">✓ 4 jam</td><td class="yes">✓ 8 jam</td></tr>
-          <tr><td>Maintenance</td><td class="yes">✓ 3 bln</td><td class="yes">✓ 6 bln</td><td class="yes">✓ 12 bln</td></tr>
-          <tr><td>Backup</td><td class="no">–</td><td class="yes">✓ Bulanan</td><td class="yes">✓ Mingguan</td></tr>
+          <tr class="cat"><td colspan="4">🎁 Termasuk</td></tr>
+          <tr><td>Domain .ac.id</td><td class="yes">1 th</td><td class="yes">1 th</td><td class="yes">1 th</td></tr>
+          <tr><td>Hosting SSD</td><td class="yes">2GB</td><td class="yes">5GB</td><td class="yes">10GB</td></tr>
+          <tr><td>Training admin</td><td class="yes">2 jam</td><td class="yes">4 jam</td><td class="yes">8 jam</td></tr>
+          <tr><td>Maintenance</td><td class="yes">3 bln</td><td class="yes">6 bln</td><td class="yes">12 bln</td></tr>
+          <tr><td>Backup</td><td class="no">–</td><td class="yes">Bulanan</td><td class="yes">Mingguan</td></tr>
           <tr><td>Priority support</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td></tr>
 
-          <tr class="cat"><td colspan="4">Waktu</td></tr>
+          <tr class="cat"><td colspan="4">⏱ Waktu</td></tr>
           <tr><td>Estimasi pengerjaan</td><td>2–3 minggu</td><td>4–6 minggu</td><td>8–12 minggu</td></tr>
         </tbody>
       </table>
@@ -653,14 +1080,57 @@ footer p + p { margin-top: 8px; opacity: 0.75; }
   </div>
 </section>
 
+<!-- CTA -->
+<section id="cta" class="section cta-section">
+  <div class="wrap">
+    <h2 class="animate-on-scroll">Siap membawa kampus Anda ke dunia digital?</h2>
+    <p class="animate-on-scroll">Hubungi kami sekarang untuk konsultasi gratis. Kami akan membantu memilih paket yang tepat untuk kebutuhan dan anggaran kampus Anda.</p>
+    <div class="cta-buttons animate-on-scroll">
+      <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20ingin%20konsultasi%20tentang%20website%20kampus" class="btn btn-accent" target="_blank">💬 Chat WhatsApp</a>
+      <a href="mailto:favyour01@gmail.com?subject=Konsultasi%20Website%20Kampus" class="btn btn-ghost">📧 Email Kami</a>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <footer>
   <div class="wrap">
-    <p>Paket Jasa Pembuatan Website Kampus — 2026</p>
-    <p>* Harga dapat berubah sesuai kompleksitas dan kebutuhan spesifik kampus.</p>
+    <div class="footer-brand">Zangetsu Web</div>
+    <p>Jasa Pembuatan Website Kampus Profesional & Terpercaya</p>
+    <p>© 2026 All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#paket">Paket</a>
+      <a href="#perbandingan">Perbandingan</a>
+      <a href="https://wa.me/6281234567890">WhatsApp</a>
+      <a href="mailto:favyour01@gmail.com">Email</a>
+    </div>
   </div>
 </footer>
+
+<script>
+// Scroll animation observer
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
 
 </body>
 </html>
