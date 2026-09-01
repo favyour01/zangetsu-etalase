@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paket Jasa Pembuatan Website Kampus</title>
+<meta name="description" content="Tiga paket jasa pembuatan website kampus — dari profil dasar sampai sistem PMB online lengkap, termasuk domain, hosting, dan pendampingan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #16213E;
+  --ink-soft: #364569;
+  --gold: #9C6F27;
+  --gold-soft: #C99A3F;
+  --forest: #2F6F62;
+  --parchment: #FBF9F4;
+  --parchment-alt: #F1EBDC;
+  --card: #FFFFFF;
+  --line: #E4DECE;
+  --muted: #6B7280;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--parchment);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+}
+img, svg { display: block; max-width: 100%; }
+h1, h2, h3, .price-amount, .pkg-tier { font-family: 'Source Serif 4', Georgia, serif; }
+a { color: inherit; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-inline: clamp(20px, 5vw, 40px); }
+section[id] { scroll-margin-top: 76px; }
+
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 26px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  font-family: 'Inter', sans-serif;
+}
+.btn-primary {
+  background: var(--ink);
+  color: white;
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(22,33,62,0.25); }
+.btn-gold {
+  background: var(--gold);
+  color: white;
+}
+.btn-gold:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(156,111,39,0.3); }
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.btn-ghost:hover { border-color: var(--ink); }
+
+/* ---------- Hero ---------- */
+.hero {
+  background: var(--ink);
+  background-image:
+    linear-gradient(160deg, var(--ink) 0%, #223159 100%),
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: auto, 34px 34px, 34px 34px;
+  color: white;
+  padding: clamp(48px, 8vw, 84px) 0 clamp(36px, 6vw, 56px);
+}
+.hero-eyebrow {
+  font-size: 0.92rem;
+  color: #D9C48E;
+  margin-bottom: 14px;
+}
+.hero h1 {
+  font-size: clamp(1.85rem, 1.35rem + 2.2vw, 2.9rem);
+  font-weight: 600;
+  line-height: 1.25;
+  max-width: 16ch;
+}
+.hero p {
+  margin-top: 18px;
+  max-width: 56ch;
+  color: #C7D0E0;
+  font-size: clamp(1rem, 0.94rem + 0.3vw, 1.1rem);
+}
+/* Stat strip */
+.stats {
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+}
+.stats-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.stat {
+  padding: 18px 24px 18px 0;
+  margin-right: 24px;
+  border-right: 1px solid var(--line);
+}
+.stat:last-child { border-right: none; margin-right: 0; }
+.stat-num {
+  display: block;
+  font-family: 'Source Serif 4', serif;
+  font-weight: 700;
+  font-size: 1.45rem;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.stat-label { display: block; font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+/* ---------- Quick nav ---------- */
+.quicknav {
+  background: rgba(251,249,244,0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.quicknav-row {
+  display: flex;
+  gap: clamp(18px, 4vw, 30px);
+  overflow-x: auto;
+  padding: 14px 0;
+}
+.quicknav a {
+  white-space: nowrap;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+.quicknav a:hover { color: var(--gold); }
+
+/* ---------- Section shell ---------- */
+.section { padding: clamp(44px, 7vw, 76px) 0; }
+.section-head { max-width: 60ch; margin-bottom: clamp(28px, 5vw, 44px); }
+.section-head h2 {
+  font-size: clamp(1.5rem, 1.28rem + 1vw, 2rem);
+  font-weight: 600;
+  color: var(--ink);
+}
+.section-head p {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+#perbandingan { background: var(--parchment-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+/* ---------- Package blocks ---------- */
+.pkg {
+  border-top: 1px solid var(--line);
+  padding-block: clamp(32px, 5vw, 44px);
+}
+.pkg:first-of-type { border-top: none; padding-top: 4px; }
+.pkg.featured {
+  border-left: 3px solid var(--gold);
+  padding-left: clamp(16px, 3vw, 26px);
+  background: linear-gradient(180deg, rgba(201,154,63,0.06), transparent 60%);
+}
+
+.pkg-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 28px;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.pkg-heading {
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+  flex: 1 1 320px;
+}
+.pkg-tier {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--gold-soft);
+  flex-shrink: 0;
+}
+.pkg-titles h3 {
+  font-size: clamp(1.2rem, 1.08rem + 0.5vw, 1.45rem);
+  font-weight: 600;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.pkg-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: white;
+  background: var(--gold);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.pkg-titles p {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  max-width: 48ch;
+}
+.pkg-price {
+  text-align: right;
+  flex-shrink: 0;
+}
+.price-amount {
+  display: block;
+  font-size: clamp(1.35rem, 1.2rem + 0.7vw, 1.7rem);
+  font-weight: 700;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.price-note { font-size: 0.82rem; color: var(--muted); }
+
+.pkg-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 28px;
+  margin-top: 28px;
+}
+.pkg-col h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-transform: none;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 4px;
+}
+.check-list { list-style: none; }
+.check-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 7px 0;
+  font-size: 0.92rem;
+  border-bottom: 1px solid var(--line);
+}
+.check-list li:last-child { border-bottom: none; }
+.tick {
+  flex-shrink: 0;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.tick.yes { color: var(--forest); }
+.tick.no { color: var(--muted); }
+.check-list li.no { color: var(--muted); }
+
+.pkg-foot {
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.pkg-duration { font-size: 0.9rem; color: var(--muted); }
+
+/* ---------- Comparison table ---------- */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+}
+table.compare {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 620px;
+}
+table.compare th, table.compare td {
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+table.compare th {
+  background: var(--ink);
+  color: white;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+}
+table.compare th:first-child, table.compare td:first-child {
+  text-align: left;
+  white-space: normal;
+  position: sticky;
+  left: 0;
+  background: var(--card);
+  box-shadow: 1px 0 0 var(--line);
+}
+table.compare th:first-child { background: var(--ink); z-index: 3; }
+table.compare td:first-child { font-weight: 500; z-index: 1; }
+table.compare tr:nth-child(even) td { background: var(--parchment-alt); }
+table.compare tr:nth-child(even) td:first-child { background: #EDE6D4; }
+table.compare tr.cat td {
+  background: var(--ink) !important;
+  color: white;
+  font-weight: 600;
+  text-align: left;
+  position: static;
+  box-shadow: none;
+}
+table.compare .yes { color: var(--forest); font-weight: 700; }
+table.compare .no { color: var(--muted); }
+.compare-note { margin-top: 14px; font-size: 0.88rem; color: var(--muted); }
+
+/* ---------- CTA ---------- */
+/* ---------- Footer ---------- */
+footer {
+  background: var(--ink);
+  color: #C7D0E0;
+  padding: 34px 0;
+  text-align: center;
+  font-size: 0.88rem;
+}
+footer p + p { margin-top: 8px; opacity: 0.75; }
+
+/* ---------- Responsive tweaks ---------- */
+@media (max-width: 560px) {
+  .pkg-price { text-align: left; }
+  .pkg-head { flex-direction: column; }
+  table.compare th, table.compare td { padding: 10px 12px; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="hero-eyebrow">Jasa Pembuatan Website Kampus</p>
+    <h1>Website kampus yang lengkap, cepat tayang, dan mudah dikelola</h1>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="wrap stats-row">
+    <div class="stat"><span class="stat-num">3</span><span class="stat-label">Paket Pilihan</span></div>
+    <div class="stat"><span class="stat-num">Rp 6,9jt</span><span class="stat-label">Harga Mulai Dari</span></div>
+    <div class="stat"><span class="stat-num">2–12</span><span class="stat-label">Minggu Pengerjaan</span></div>
+    <div class="stat"><span class="stat-num">1 Thn</span><span class="stat-label">Domain & Hosting Termasuk</span></div>
+  </div>
+</div>
+
+<nav class="quicknav">
+  <div class="wrap quicknav-row">
+    <a href="#paket">Paket & Harga</a>
+    <a href="#perbandingan">Perbandingan Fitur</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- PAKET -->
+<section id="paket" class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Pilih paket yang sesuai kebutuhan</h2>
+      <p>Berikut cakupan halaman, fitur, dan kelengkapan dari masing-masing paket. Semua harga sudah termasuk domain, hosting, dan maintenance di periode awal.</p>
+    </div>
+
+    <!-- STARTER -->
+    <article class="pkg" id="starter">
+      <div class="pkg-head">
+        <div class="pkg-heading">
+          <span class="pkg-tier">01</span>
+          <div class="pkg-titles">
+            <h3>Paket Starter</h3>
+            <p>Website profil kampus dasar — tampil profesional secara cepat, 5–8 halaman.</p>
+          </div>
+        </div>
+        <div class="pkg-price">
+          <span class="price-amount">Rp 6.900.000</span>
+          <span class="price-note">sekali bayar</span>
+        </div>
+      </div>
+
+      <div class="pkg-body">
+        <div class="pkg-col">
+          <h4>Halaman Website</h4>
+          <ul class="check-list">
+            <li><span class="tick yes">✓</span> Homepage (hero, sambutan, counter, berita, galeri, kontak)</li>
+            <li><span class="tick yes">✓</span> Profil (sejarah, visi-misi, struktur organisasi)</li>
+            <li><span class="tick yes">✓</span> Akademik (info fakultas & prodi)</li>
+            <li><span class="tick yes">✓</span> Berita & artikel (blog system)</li>
+            <li><span class="tick yes">✓</span> Kontak (form, Google Maps, sosmed)</li>
+            <li><span class="tick yes">✓</span> Galeri (foto & video)</li>
+          </ul>
+        </div>
+        <div class="pkg-col">
+          <h4>Fitur</h4>
+          <ul class="check-list">
+            <li><span class="tick yes">✓</span> Responsive design (mobile, tablet, desktop)</li>
+            <li><span class="tick yes">✓</span> SEO basic (meta tags, sitemap, schema)</li>
+            <li><span class="tick yes">✓</span> Tombol WhatsApp mengambang</li>
+            <li><span class="tick yes">✓</span> Integrasi media sosial</li>
+            <li><span class="tick yes">✓</span> Google Maps & form kontak</li>
+            <li><span class="tick yes">✓</span> Animasi dasar (scroll, hover)</li>
+            <li><span class="tick yes">✓</span> Google Analytics & SSL</li>
+            <li class="no"><span class="tick no">–</span> Multi-fakultas / prodi</li>
+            <li class="no"><span class="tick no">–</span> Sistem PMB online</li>
+            <li class="no"><span class="tick no">–</span> FAQ interaktif, popup promosi</li>
+          </ul>
+        </div>
+        <div class="pkg-col">
+          <h4>Termasuk dalam Paket</h4>
+          <ul class="check-list">
+            <li><span class="tick yes">✓</span> Domain .ac.id / .id (1 tahun)</li>
+            <li><span class="tick yes">✓</span> Hosting SSD 2GB (1 tahun)</li>
+            <li><span class="tick yes">✓</span> SSL certificate</li>
+            <li><span class="tick yes">✓</span> Tema premium</li>
+            <li><span class="tick yes">✓</span> Training admin (2 jam)</li>
+            <li><span class="tick yes">✓</span> Maintenance 3 bulan</li>
+            <li><span class="tick yes">✓</span> Dokumentasi</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pkg-foot">
+        <span class="pkg-duration">Estimasi pengerjaan: 2–3 minggu</span>
+      </div>
+    </article>
+
+    <!-- PROFESSIONAL -->
+    <article class="pkg featured" id="professional">
+      <div class="pkg-head">
+        <div class="pkg-heading">
+          <span class="pkg-tier">02</span>
+          <div class="pkg-titles">
+            <h3>Paket Professional <span class="pkg-pill">Paling diminati</span></h3>
+            <p>Website kampus lengkap dengan halaman per fakultas dan program studi.</p>
+          </div>
+        </div>
+        <div class="pkg-price">
+          <span class="price-amount">Rp 15.500.000</span>
+          <span class="price-note">sekali bayar</span>
+        </div>
+      </div>
+
+      <div class="pkg-body">
+        <div class="pkg-col">
+          <h4>Halaman Website</h4>
+          <ul class="check-list">
+            <li><span class="tick yes">✓</span> Semua halaman Paket Starter</li>
+            <li><span class="tick yes">✓</span> Homepage premium (slider, counter animasi, FAQ, testimoni)</li>
+            <li><span class="tick yes">✓</span> Profil pimpinan (foto, jabatan, deskripsi)</li>
+            <li><span class="tick yes">✓</span> Halaman per fakultas (6 fakultas)</li>
+            <li><span class="tick yes">✓</span> Halaman per program studi (15+ prodi)</li>
+            <li><span class="tick yes">✓</span> Akreditasi & fasilitas (gallery)</li>
+            <li><span class="tick yes">✓</span> Kalender akademik & biaya pendidikan</li>
+            <li><span class="tick yes">✓</span> Kerjasama & kemahasiswaan (UKM, BEM, DPM)</li>
+            <li><span class="tick yes">✓</span> Tracer study & SDGs</li>
+          </ul>
+        </div>
+        <div class="pkg-col">
+          <h4>Fitur</h4>
+          <ul class="check-list">
+            <li><span class="tick yes">✓</span> Semua fitur Paket Starter</li>
+            <li><span class="tick yes">✓</span> Manajemen berita per kategori (fakultas, prodi, prestasi)</li>
+            <li><span class="tick yes">✓</span> Filter berita AJAX per kategori</li>
+            <li><span class="tick yes">✓</span> Event/agenda + countdown timer</li>
+            <li><span class="tick yes">✓</span> FAQ interaktif (accordion)</li>
+            <li><span class="tick yes">✓</span> Counter statistik animasi</li>
+            <li><span class="tick yes">✓</span> Popup promosi (beasiswa, pendaftaran)</li>
+            <li><span class="tick yes">✓</span> Galeri foto + lightbox</li>
+            <li><span class="tick yes">✓</span> Download manager (brosur, buku saku)</li>
+            <li><span class="tick yes">✓</span> Newsletter & social share</li>
+            <li><span class="tick yes">✓</span> Google Search Console + Analytics</li>
+            <li class="no"><span class="tick no">–</span> Sistem PMB online (pendaftaran + pembayaran)</li>
+            <li class="no"><span class="tick no">–</span> Website terpisah per fakultas (subdomain)</li>
+          </ul>
+        </div>
+        <div class="pkg-col">
+          <h4>Termasuk dalam Paket</h4>
+          <ul class="check-list">
+            <li><span class="tick yes">✓</span> Domain .ac.id / .id (1 tahun)</li>
+            <li><span class="tick yes">✓</span> Hosting SSD 5GB (1 tahun)</li>
+            <li><span class="tick yes">✓</span> SSL certificate</li>
+            <li><span class="tick yes">✓</span> Tema premium + Elementor Pro</li>
+            <li><span class="tick yes">✓</span> Training admin (4 jam)</li>
+            <li><span class="tick yes">✓</span> Maintenance 6 bulan</li>
+            <li><span class="tick yes">✓</span> Dokumentasi lengkap</li>
+            <li><span class="tick yes">✓</span> Backup bulanan</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pkg-foot">
+        <span class="pkg-duration">Estimasi pengerjaan: 4–6 minggu</span>
+      </div>
+    </article>
+
+    <!-- ENTERPRISE -->
+    <article class="pkg" id="enterprise">
+      <div class="pkg-head">
+        <div class="pkg-heading">
+          <span class="pkg-tier">03</span>
+          <div class="pkg-titles">
+            <h3>Paket Enterprise</h3>
+            <p>Solusi digital kampus menyeluruh, termasuk sistem PMB online dan subdomain per fakultas.</p>
+          </div>
+        </div>
+        <div class="pkg-price">
+          <span class="price-amount">Rp 29.500.000</span>
+          <span class="price-note">sekali bayar</span>
+        </div>
+      </div>
+
+      <div class="pkg-body">
+        <div class="pkg-col">
+          <h4>Halaman Website</h4>
+          <ul class="check-list">
+            <li><span class="tick yes">✓</span> Semua halaman Paket Professional</li>
+            <li><span class="tick yes">✓</span> Halaman PMB lengkap (jalur, biaya, beasiswa, pendaftaran)</li>
+            <li><span class="tick yes">✓</span> Her-registrasi online & cek tagihan</li>
+            <li><span class="tick yes">✓</span> Brosur digital + flipbook</li>
+            <li><span class="tick yes">✓</span> SDG mapping (17 goals)</li>
+            <li><span class="tick yes">✓</span> Penjaminan mutu & identitas visual</li>
+            <li><span class="tick yes">✓</span> Halaman opini / suara kampus</li>
+          </ul>
+        </div>
+        <div class="pkg-col">
+          <h4>Fitur</h4>
+          <ul class="check-list">
+            <li><span class="tick yes">✓</span> Semua fitur Paket Professional</li>
+            <li><span class="tick yes">✓</span> Sistem PMB online (form + pembayaran + notifikasi)</li>
+            <li><span class="tick yes">✓</span> Website per fakultas (subdomain terpisah)</li>
+            <li><span class="tick yes">✓</span> Flipbook digital (katalog, jurnal, brosur)</li>
+            <li><span class="tick yes">✓</span> Integrasi Google Ads + AdSense</li>
+            <li><span class="tick yes">✓</span> Tracer study system</li>
+            <li><span class="tick yes">✓</span> Multi-user admin (per fakultas)</li>
+            <li><span class="tick yes">✓</span> SEO lanjutan (schema, OG, Twitter card)</li>
+            <li><span class="tick yes">✓</span> Custom post type (dosen, penelitian, pengabdian)</li>
+            <li><span class="tick yes">✓</span> Form builder & API integration ready</li>
+            <li><span class="tick yes">✓</span> Optimasi performa & keamanan (hardening)</li>
+          </ul>
+        </div>
+        <div class="pkg-col">
+          <h4>Termasuk dalam Paket</h4>
+          <ul class="check-list">
+            <li><span class="tick yes">✓</span> Domain .ac.id / .id (1 tahun)</li>
+            <li><span class="tick yes">✓</span> Hosting SSD 10GB (1 tahun)</li>
+            <li><span class="tick yes">✓</span> Tema premium + Elementor Pro + addons</li>
+            <li><span class="tick yes">✓</span> Training admin (8 jam)</li>
+            <li><span class="tick yes">✓</span> Maintenance 12 bulan</li>
+            <li><span class="tick yes">✓</span> Dokumentasi + video tutorial</li>
+            <li><span class="tick yes">✓</span> Backup mingguan</li>
+            <li><span class="tick yes">✓</span> Priority support</li>
+            <li><span class="tick yes">✓</span> Free revisi (3x)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pkg-foot">
+        <span class="pkg-duration">Estimasi pengerjaan: 8–12 minggu</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- PERBANDINGAN -->
+<section id="perbandingan" class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Bandingkan paket secara sekilas</h2>
+      <p>Ringkasan fitur utama ketiga paket dalam satu tabel. Geser ke samping untuk melihat semua kolom di layar kecil.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>Fitur</th>
+            <th>Starter<br>Rp 6,9jt</th>
+            <th>Professional<br>Rp 15,5jt</th>
+            <th>Enterprise<br>Rp 29,5jt</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="cat"><td colspan="4">Halaman</td></tr>
+          <tr><td>Jumlah halaman</td><td>5–8</td><td>15–25</td><td>30+</td></tr>
+          <tr><td>Halaman per fakultas</td><td class="no">–</td><td class="yes">✓ 6 fakultas</td><td class="yes">✓ 6+ fakultas</td></tr>
+          <tr><td>Halaman per prodi</td><td class="no">–</td><td class="yes">✓ 15 prodi</td><td class="yes">✓ 15+ prodi</td></tr>
+          <tr><td>Profil pimpinan</td><td class="no">–</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Halaman PMB</td><td class="no">–</td><td class="yes">✓ Info</td><td class="yes">✓ Lengkap</td></tr>
+
+          <tr class="cat"><td colspan="4">Fitur Utama</td></tr>
+          <tr><td>Responsive design</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Blog / berita</td><td class="yes">✓ Basic</td><td class="yes">✓ Lanjutan</td><td class="yes">✓ Penuh</td></tr>
+          <tr><td>Filter kategori AJAX</td><td class="no">–</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Event / agenda</td><td class="no">–</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Counter statistik animasi</td><td class="no">–</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>FAQ interaktif</td><td class="no">–</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Popup promosi</td><td class="no">–</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Tombol WhatsApp</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Download manager</td><td class="no">–</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Flipbook digital</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td></tr>
+          <tr><td>Sistem PMB online</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td></tr>
+          <tr><td>Multi-user admin</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td></tr>
+          <tr><td>Subdomain fakultas</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td></tr>
+          <tr><td>Tracer study</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td></tr>
+
+          <tr class="cat"><td colspan="4">SEO & Marketing</td></tr>
+          <tr><td>SEO basic</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Google Analytics</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Google Search Console</td><td class="no">–</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Schema.org</td><td class="no">–</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Open Graph + Twitter Card</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td></tr>
+          <tr><td>Google Ads</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td></tr>
+
+          <tr class="cat"><td colspan="4">Termasuk</td></tr>
+          <tr><td>Domain .ac.id</td><td class="yes">✓ 1 th</td><td class="yes">✓ 1 th</td><td class="yes">✓ 1 th</td></tr>
+          <tr><td>Hosting SSD</td><td class="yes">✓ 2GB</td><td class="yes">✓ 5GB</td><td class="yes">✓ 10GB</td></tr>
+          <tr><td>Training admin</td><td class="yes">✓ 2 jam</td><td class="yes">✓ 4 jam</td><td class="yes">✓ 8 jam</td></tr>
+          <tr><td>Maintenance</td><td class="yes">✓ 3 bln</td><td class="yes">✓ 6 bln</td><td class="yes">✓ 12 bln</td></tr>
+          <tr><td>Backup</td><td class="no">–</td><td class="yes">✓ Bulanan</td><td class="yes">✓ Mingguan</td></tr>
+          <tr><td>Priority support</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td></tr>
+
+          <tr class="cat"><td colspan="4">Waktu</td></tr>
+          <tr><td>Estimasi pengerjaan</td><td>2–3 minggu</td><td>4–6 minggu</td><td>8–12 minggu</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="compare-note">* Harga dan cakupan dapat disesuaikan lebih lanjut sesuai kompleksitas dan kebutuhan spesifik kampus.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Paket Jasa Pembuatan Website Kampus — 2026</p>
+    <p>* Harga dapat berubah sesuai kompleksitas dan kebutuhan spesifik kampus.</p>
+  </div>
+</footer>
+
+</body>
+</html>
