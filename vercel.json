@@ -1,7 +1,9 @@
 {
-  "name": "zangetsu-etalase",
   "framework": "nextjs",
   "buildCommand": "npm run build",
   "installCommand": "npm install",
-  "outputDirectory": ".next"
+  "outputDirectory": ".next",
+  "env": {
+    "PRISMA_SKIP_POSTINSTALL_GENERATE": "true"
+  }
 }
