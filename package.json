@@ -13,7 +13,6 @@
     "db:seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
-    "@next/swc-win32-x64-msvc": "^16.3.4",
     "@prisma/client": "^5.22.0",
     "bcryptjs": "^2.4.3",
     "clsx": "^2.1.1",
@@ -24,6 +23,9 @@
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.4.1",
     "zod": "^3.23.8"
+  },
+  "engines": {
+    "node": ">=18.17.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
