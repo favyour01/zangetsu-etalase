@@ -21,6 +21,7 @@ import {
   Coins,
   BarChart3,
   Shield,
+  CircleDollarSign,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -42,6 +43,7 @@ const navItems: Record<string, NavItem[]> = {
     { label: "Etalase Produk", href: "/member/products", icon: <Package size={20} /> },
     { label: "Pesanan Saya", href: "/member/orders", icon: <ShoppingCart size={20} /> },
     { label: "Komisi", href: "/member/commissions", icon: <TrendingUp size={20} /> },
+    { label: "Topup Saldo", href: "/member/topups", icon: <CircleDollarSign size={20} /> },
     { label: "Withdrawal", href: "/member/withdrawals", icon: <Wallet size={20} /> },
     { label: "Chat Support", href: "/member/chat", icon: <MessageSquare size={20} /> },
     { label: "Profil", href: "/member/profile", icon: <User size={20} /> },
@@ -63,6 +65,7 @@ const navItems: Record<string, NavItem[]> = {
     { label: "Referrals", href: "/superadmin/referrals", icon: <Link2 size={20} /> },
     { label: "Komisi", href: "/superadmin/commissions", icon: <TrendingUp size={20} /> },
     { label: "Withdrawals", href: "/superadmin/withdrawals", icon: <Wallet size={20} /> },
+    { label: "Topup", href: "/superadmin/topups", icon: <CircleDollarSign size={20} /> },
     { label: "Tokens", href: "/superadmin/tokens", icon: <Coins size={20} /> },
     { label: "Tema", href: "/superadmin/themes", icon: <Palette size={20} /> },
     { label: "Statistik", href: "/superadmin/analytics", icon: <BarChart3 size={20} /> },
