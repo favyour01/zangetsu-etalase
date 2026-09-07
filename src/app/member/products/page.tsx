@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import prisma from "@/lib/prisma";
 import { formatCurrency } from "@/lib/utils";
 import { Eye, MousePointerClick, ShoppingCart, Coins } from "lucide-react";

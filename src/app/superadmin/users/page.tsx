@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import prisma from "@/lib/prisma";
 import { formatCurrency, formatDateTime } from "@/lib/utils";
 import { Users, Shield, Star, User } from "lucide-react";

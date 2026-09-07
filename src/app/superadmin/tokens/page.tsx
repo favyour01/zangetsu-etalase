@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import prisma from "@/lib/prisma";
 import { formatCurrency } from "@/lib/utils";
 import { Coins, Plus, Edit, TrendingUp, Users } from "lucide-react";

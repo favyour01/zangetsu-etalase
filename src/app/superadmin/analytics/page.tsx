@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import prisma from "@/lib/prisma";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 import { BarChart3, TrendingUp, Users, ShoppingCart, MousePointerClick, DollarSign } from "lucide-react";

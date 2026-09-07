@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import prisma from "@/lib/prisma";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 import StatCard from "@/components/ui/StatCard";

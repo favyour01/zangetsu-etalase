@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import prisma from "@/lib/prisma";
 import { formatCurrency } from "@/lib/utils";
 import StatusBadge from "@/components/ui/StatusBadge";
